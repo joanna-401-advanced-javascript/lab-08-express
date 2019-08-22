@@ -8,7 +8,7 @@ describe('Categories API', () => {
   test('Can post a new category, returns saved category', () => {
     const testCategory = {
       name: 'vacation',
-      description: 'time away'
+      description: 'time away',
     };
 
     return mockRequest.post('/api/v1/categories')
@@ -31,12 +31,12 @@ describe('Categories API', () => {
   test('Can modify existing category', () => {
     const testCategoryTwo = {
       name: 'sky',
-      description: 'blue'
+      description: 'blue',
     };
 
     const updatedCategory = {
       name: 'ocean',
-      description: 'wet'
+      description: 'wet',
     };
 
     return mockRequest.post('/api/v1/categories')
@@ -47,14 +47,14 @@ describe('Categories API', () => {
           .then(response => {
             expect(response.status).toEqual(200);
             expect(response.body.name).toEqual('ocean');
-          })
-      })
+          });
+      });
   });
 
   test('Can delete existing category', () => {
     const testCategoryThree = {
       name: 'burgers',
-      description: 'buns of delight'
+      description: 'buns of delight',
     };
 
     return mockRequest.post('/api/v1/categories')
@@ -68,9 +68,9 @@ describe('Categories API', () => {
             return mockRequest.get('/api/v1/categories')
               .then(response => {
                 expect(response.body.results.count).toEqual(2);
-              })
+              });
           });
-      })
+      });
   });
 });
 
@@ -79,7 +79,7 @@ describe('Products API', () => {
     const testProduct = {
       name: 'smelly smells',
       ranking: -50,
-      invisible: true
+      invisible: true,
     };
 
     return mockRequest.post('/api/v1/products')
@@ -103,13 +103,13 @@ describe('Products API', () => {
     const testProductTwo = {
       name: 'baby birds',
       ranking: 123,
-      invisible: false
+      invisible: false,
     };
 
     const updatedProduct = {
       name: 'puppies',
       ranking: 156,
-      invisible: false
+      invisible: false,
     };
 
     return mockRequest.post('/api/v1/products')
@@ -120,15 +120,15 @@ describe('Products API', () => {
           .then(response => {
             expect(response.status).toEqual(200);
             expect(response.body.name).toEqual('puppies');
-          })
-      })
+          });
+      });
   });
 
   test('Can delete existing product', () => {
     const testProductThree = {
       name: 'hiccups',
       ranking: 2,
-      invisible: true
+      invisible: true,
     };
 
     return mockRequest.post('/api/v1/products')
@@ -142,8 +142,8 @@ describe('Products API', () => {
             return mockRequest.get('/api/v1/products')
               .then(response => {
                 expect(response.body.results.count).toEqual(2);
-              })
+              });
           });
-      })
+      });
   });
 });
