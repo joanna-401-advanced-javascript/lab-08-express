@@ -27,4 +27,49 @@ describe('Categories API', () => {
         expect(response.body.results.results[0].name).toEqual('vacation');
       });
   });
+
+  test('Can modify existing category', () => {
+    const testCategoryTwo = {
+      name: 'sky',
+      description: 'blue'
+    };
+
+    const updatedCategory = {
+      name: 'ocean',
+      description: 'wet'
+    };
+
+    return mockRequest.post('/api/v1/categories')
+      .send(testCategoryTwo)
+      .then(response => {
+        return mockRequest.put(`/api/v1/categories/${response.body._id}`)
+          .send(updatedCategory)
+          .then(response => {
+            expect(response.status).toEqual(200);
+            expect(response.body.name).toEqual('ocean');
+          })
+      })
+  });
+
+  test('Can delete existing category', () => {
+    const testCategoryThree = {
+      name: 'burgers',
+      description: 'buns of delight'
+    };
+
+    return mockRequest.post('/api/v1/categories')
+      .send(testCategoryThree)
+      .then(response => {
+        return mockRequest.delete(`/api/v1/categories/${response.body._id}`)
+          .then(response => {
+            expect(response.status).toEqual(200);
+            expect(response.body.name).toEqual('burgers');
+
+            return mockRequest.get('/api/v1/categories')
+              .then(response => {
+                expect(response.body.results.count).toEqual(2);
+              })
+          });
+      })
+  });
 });
