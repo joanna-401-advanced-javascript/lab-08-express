@@ -16,6 +16,8 @@ const app = express();
 const categoriesRoutes = require('../routes/category-routes');
 const productsRoutes = require('../routes/products-routes');
 
+app.use('/docs', express.static('./docs'));
+
 // App Level MW
 app.use(cors());
 app.use(morgan('dev'));
